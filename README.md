@@ -1,2 +1,2 @@
 # huffmanWordCode
-Huffman encoder/decoder on word basis
+Huffman encoder/decoder on a word basis
