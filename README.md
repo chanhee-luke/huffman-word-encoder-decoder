@@ -1,4 +1,4 @@
-# Huffman encoder/decoder on a word basis
+# Word-level Huffman encoder/decoder
 Luke Song
 
 # Overview
