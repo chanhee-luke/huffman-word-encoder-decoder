@@ -3,6 +3,7 @@ Luke Song
 
 # Overview
 Encodes text file into a word-level huffman coding. Key file is also produced from the encoder.
+
 Decoder decodes a huffman coded bitstream from the key file.
 
 # Usage
