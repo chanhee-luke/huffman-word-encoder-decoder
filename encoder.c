@@ -299,7 +299,7 @@ void Translate(char inputFile[], char outputFile[]){
             // if the word is not in vocab print out that vocab
             if ( i == vocab_size ){  
               printf("token is @@%s@@\n",token);
-              fprintf(outFile, token);
+              fprintf(outFile, "%s", token);
               break;
             }
             else if (strcasecmp(token, vocab[i].word) == 0){
@@ -309,7 +309,7 @@ void Translate(char inputFile[], char outputFile[]){
             i++;
             
         }
-        fprintf(outFile, vocab[0].code);
+        fprintf(outFile, "%s", vocab[0].code);
         fprintf(outFile, "%c", '\n');
       }
       else {
@@ -320,11 +320,11 @@ void Translate(char inputFile[], char outputFile[]){
           // if the word is not in vocab print out that vocab
           if (i == vocab_size){  
             printf("token is @@%s@@\n",token);
-            fprintf(outFile, token);
+            fprintf(outFile, "%s", token);
             break;
           }
           else if (strcasecmp(token, vocab[i].word) == 0){
-            fprintf(outFile, "%s ", vocab[i].code);
+            fprintf(outFile, "%s", vocab[i].code);
             break;
           }
           i++;
