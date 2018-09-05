@@ -1,34 +1,49 @@
-#/usr/bin/env python
+#/usr/bin/env python3
 # huffman decoder
-# usage: decoder.py key input 
+# Usage: decoder.py key input 
 
 import sys
-from bitarray import bitarray
+import re
 
-huffman_dict = dict()
+def huffmanDecode (dictionary, text, p):
+        res = ""
+        while text:
+            m = re.match(p, text)
+            if m == None:
+                break
+            res += dictionary[m.group()]+" "
+            text = text[len(m.group()):]
+        return res
 
-try:
-	with open(sys.argv[1]) as f:
-		for index, line in enumerate(f):
-			if index % 2 is 1:
-				code = bitarray(line.strip())
-				huffman_dict[word] = code
-			elif index % 2 is 0:
-				word = line.strip()
-except IOError:
-	print("Cannot open file")
-	sys.exit(1)
-f.close()
+if __name__ == "__main__": 
+    huffman_dict = dict()
 
-try:
-	with open(sys.argv[2]) as file:
-		for index, line in enumerate(file):
-			code = bitarray(line.strip())
-			dec = bitarray(code).decode(huffman_dict)
-			output = " ".join(dec)
-			print(output.strip('</s>'))
-except IOError:
-	print("Cannot open file")
-	sys.exit(1)
-file.close()
+    # Read huffman key and create dict
+    try:
+        with open(sys.argv[1]) as key:
+            for index, line in enumerate(key):
+                if index % 2 is 1:
+                    code = line.strip()
+                    huffman_dict[code] = word
+                elif index % 2 is 0:
+                    word = line.strip()
+    except (IndexError, IOError) as e:
+        print("Cannot open key file!")
+        print("Usage: decoder.py key input")
+        sys.exit(1)
+    key.close()
+    
+    # Decode input using dict and output decoded text
+    try:
+        with open(sys.argv[2]) as encoded:
+            p = "|".join(huffman_dict) # join keys to regex
+            for line in encoded:
+                dec = huffmanDecode(huffman_dict, line.strip(), p)
+                output = dec.strip()
+                print(output.strip('</s>'))
+    except (IndexError, IOError) as e:
+        print("Cannot open input file!")
+        print("Usage: decoder.py key input")
+        sys.exit(1)
+    encoded.close()
 
